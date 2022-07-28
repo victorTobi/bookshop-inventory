@@ -23,11 +23,11 @@ author_text = StringVar()
 input2 = Entry(window, textvariable=author_text)
 input2.grid(row=0, column=3)
 
-year_num = IntVar()
+year_num = StringVar()
 input3 = Entry(window, textvariable=year_num)
 input3.grid(row=1, column=1)
 
-book_num = IntVar()
+book_num = StringVar()
 input4 = Entry(window, textvariable=book_num)
 input4.grid(row=1, column=3)
 
