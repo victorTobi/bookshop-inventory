@@ -2,6 +2,16 @@ from tkinter import *
 import database
 
 
+def view_command():
+    listview1.delete(0,END)
+    for row in database.view():
+        listview1.insert(END,row)
+
+def search_command():
+    listview1.delete(0,END)
+    for row in database.search(title_text.get(),author_text.get(),year_num.get(),book_num.get()):
+        listview1.insert(END,row)
+
 window = Tk()
 label1 = Label(window, text='Title')
 label1.grid(row=0, column=0)
@@ -47,10 +57,10 @@ scroll_bar.configure(command=listview1.yview)
 buttons and configuration below
 b1 - b6 where b means button ie variable name
 '''
-b1 = Button(window, text='view all', width=12)
+b1 = Button(window, text='view all', width=12, command=view_command)
 b1.grid(row=2, column=3)
 
-b2 = Button(window, text='Search entry', width=12)
+b2 = Button(window, text='Search entry', width=12, command=search_command)
 b2.grid(row=3, column=3)
 
 b3 = Button(window, text='Add entry', width=12)
