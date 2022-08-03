@@ -2,6 +2,16 @@ from tkinter import *
 import database
 
 
+
+
+
+
+def get_selected_row(event):
+    global selected_tuple
+    index = listview1.curselection()[0]
+    selected_tuple = listview1.get(index)
+    return(selected_tuple)
+
 def view_command():
     listview1.delete(0,END)
     for row in database.view():
@@ -11,6 +21,14 @@ def search_command():
     listview1.delete(0,END)
     for row in database.search(title_text.get(),author_text.get(),year_num.get(),book_num.get()):
         listview1.insert(END,row)
+
+def add_command():
+    database.insert(title_text.get(),author_text.get(),year_num.get(),book_num.get())
+    listview1.delete(0,END)
+    listview1.insert(END,(title_text.get(),author_text.get(),year_num.get(),book_num.get()))
+
+def delete_command():
+    database.delete(selected_tuple[0])
 
 window = Tk()
 label1 = Label(window, text='Title')
@@ -45,6 +63,8 @@ input4.grid(row=1, column=3)
 listview1 = Listbox(window, height=6, width=35)
 listview1.grid(row=2, column=0, rowspan=6, columnspan=2)
 
+listview1.bind('<<ListboxSelect>>', get_selected_row)
+
 scroll_bar = Scrollbar(window)
 scroll_bar.grid(row=2, column=2, rowspan=6)
 
@@ -63,7 +83,7 @@ b1.grid(row=2, column=3)
 b2 = Button(window, text='Search entry', width=12, command=search_command)
 b2.grid(row=3, column=3)
 
-b3 = Button(window, text='Add entry', width=12)
+b3 = Button(window, text='Add entry', width=12, command=add_command)
 b3.grid(row=4, column=3)
 
 b4 = Button(window, text='Update', width=12)

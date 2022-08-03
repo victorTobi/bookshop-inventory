@@ -56,7 +56,7 @@ def update(id,title,author,year,book_number):
 
 connect()
 #insert("test subject", "john doe", 1657, 34566633)
-update(3, title="liberation", year=2022, author='james', book_number=2299991)
+#update(3, title="liberation", year=2022, author='james', book_number=2299991)
 #delete(2)
-print(view())
+#print(view())
 #print(search(author="Victor Tobi"))
